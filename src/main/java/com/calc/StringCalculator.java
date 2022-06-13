@@ -47,7 +47,7 @@ public class StringCalculator {
     private static int sum(String[] listOfNumbers) {
         int sum = 0;
         for (String number : listOfNumbers) {
-            sum += getInt(number);
+            if (getInt(number) <= 1000) sum += getInt(number);
         }
         return sum;
     }
