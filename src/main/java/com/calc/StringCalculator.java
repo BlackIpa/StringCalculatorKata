@@ -9,23 +9,21 @@ public class StringCalculator {
         if (numbers.isEmpty()) {
             return 0;
         }
-        List<Integer> listOfNumbers = convertNumbersToList(numbers);
-        return sum(listOfNumbers);
-    }
-
-    private static List<Integer> convertNumbersToList(String numbers) {
-        String[] convertToArray = numbers.split(",");
-        List<Integer> convertedToList = new ArrayList<Integer>();
-        for (String number : convertToArray) {
-            convertedToList.add(Integer.parseInt(number));
+        else {
+            String[] listOfNumbers = convertNumbersToArray(numbers);
+            return sum(listOfNumbers);
         }
-        return convertedToList;
     }
 
-    private static int sum(List<Integer> listOfNumbers) {
+    private static String[] convertNumbersToArray(String numbers) {
+        String[] convertToArray = numbers.split(",|\n");
+        return convertToArray;
+    }
+
+    private static int sum(String[] listOfNumbers) {
         int sum = 0;
-        for (Integer number : listOfNumbers) {
-            sum += number;
+        for (String number : listOfNumbers) {
+            sum += Integer.parseInt(number);
         }
         return sum;
     }
