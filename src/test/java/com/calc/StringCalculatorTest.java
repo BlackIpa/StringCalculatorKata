@@ -1,6 +1,8 @@
 package com.calc;
 
 import org.junit.*;
+
+import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
 
 public class StringCalculatorTest {
@@ -33,5 +35,25 @@ public class StringCalculatorTest {
     @Test
     public void returnsSumWithCustomDelimiter() {
         assertEquals(3, StringCalculator.add("//;\n1;2"));
+    }
+
+    @Test
+    public void throwExceptionOnOneNegativeNumber() {
+        try{
+            StringCalculator.add("1,-2,3");
+            fail("Should throw exception");
+        } catch (RuntimeException exception) {
+            assertEquals("Negatives not allowed: [-2]", exception.getMessage());
+        }
+    }
+
+    @Test
+    public void throwExceptionOnMultipleNegativeNumber() {
+        try{
+            StringCalculator.add("1,-2,-3,3");
+            fail("Should throw exception");
+        } catch (RuntimeException exception) {
+            assertEquals("Negatives not allowed: [-2, -3]", exception.getMessage());
+        }
     }
 }
